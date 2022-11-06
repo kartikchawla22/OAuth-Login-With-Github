@@ -1,0 +1,58 @@
+body {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(225, 87, 36);
+    background: linear-gradient(0deg, rgba(225, 87, 36) 0%, rgb(179, 67, 26) 100%);
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    background: white;
+    width: 380px;
+    height: 480px;
+    border-radius: 50px;
+    box-shadow: 0 3px 16px #222;
+}
+
+.github-logo {
+    height: 160px;
+}
+
+.btn {
+    text-decoration: none;
+    display: block;
+    width: 220px;
+    line-height: 38px;
+    padding-top: 2px;
+    border-radius: 20px;
+    color: white;
+    background: rgba(225, 87, 36, 1);
+    margin: 0 auto;
+    border: none;
+    font-size: 14px;
+}
+
+input[type='text'] {
+    width: 180px;
+    line-height: 32px;
+    margin-bottom: 12px;
+    padding-left: 12px;
+}
+
+.userData {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px;
+}
+
+.data {
+    font-weight: 800;
+}
