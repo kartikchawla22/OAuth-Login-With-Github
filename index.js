@@ -14,6 +14,7 @@ app.set("view engine", "ejs");
 app.set("views", __dirname + "/static");
 app.use(express.static(path.join(__dirname, "static")));
 
+
 app.get("/", (req, res) => {
   res.redirect("/unauthorized");
 });
@@ -21,6 +22,25 @@ app.get("/", (req, res) => {
 app.get("/unauthorized", (req, res) => {
   res.render(path.join(__dirname, "/static/unauthorized"));
 });
+
+app.get('/auth', (req, res) => {
+
+  res.redirect(
+
+      `${base_url}/authorize?client_id=${GITHUB_CLIENT_ID}`,
+
+  );
+
+});
+
+app.get('/authorized', (req, res) => {
+
+  const { login, email } = req.query
+
+  res.render(path.join(__dirname, '/static/authorized'), { login, email });
+
+})
+
 
 app.get("/auth-callback", ({ query: { code } }, res) => {
   const body = {

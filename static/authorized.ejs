@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile API - Authorized</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+    <div class="card authorized">
+        <div class="top">
+            <img class="github-logo" src="../githublogo.png" />
+            <h1></span><br />Congratulations!<br />You are now Authorized!</h1>
+            <div class="userData">
+                <span>
+                    Email: <span class="data">
+                        <%=email%>
+                    </span>
+                </span>
+                <span>
+                    User Name: <span class="data">
+                        <%=login%>
+                    </span>
+                </span>
+            </div>
+            <div class="card-bottom">
+                <a class="btn" href="/unauthorized">Logout</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
