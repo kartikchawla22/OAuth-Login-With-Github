@@ -16,55 +16,56 @@ app.use(express.static(path.join(__dirname, "static")));
 
 
 app.get("/", (req, res) => {
-  res.redirect("/unauthorized");
+    res.redirect("/unauthorized");
 });
 
 app.get("/unauthorized", (req, res) => {
-  res.render(path.join(__dirname, "/static/unauthorized"));
+    res.render(path.join(__dirname, "/static/unauthorized"));
 });
 
 app.get('/auth', (req, res) => {
 
-  res.redirect(
+    res.redirect(
 
-      `${base_url}/authorize?client_id=${GITHUB_CLIENT_ID}`,
+        `${base_url}/authorize?client_id=${GITHUB_CLIENT_ID}`,
 
-  );
+    );
 
 });
 
 app.get('/authorized', (req, res) => {
 
-  const { login, email } = req.query
+    const { login, email, id } = req.query
 
-  res.render(path.join(__dirname, '/static/authorized'), { login, email });
+    res.render(path.join(__dirname, '/static/authorized'), { login, email, id });
 
 })
 
 
 app.get("/auth-callback", ({ query: { code } }, res) => {
-  const body = {
-    client_id: GITHUB_CLIENT_ID,
-    client_secret: GITHUB_SECRET,
-    code,
-  };
-  const opts = { headers: { accept: "application/json" } };
-  axios
-    .post(`${base_url}/access_token`, body, opts)
-    .then((_res) => {
-      const { access_token } = _res.data;
-      getUserData(res, access_token);
-    })
-    .catch((err) => res.status(500).json({ err: err.message }));
+    const body = {
+        client_id: GITHUB_CLIENT_ID,
+        client_secret: GITHUB_SECRET,
+        code,
+    };
+    const opts = { headers: { accept: "application/json" } };
+    axios
+        .post(`${base_url}/access_token`, body, opts)
+        .then((_res) => {
+            const { access_token } = _res.data;
+            getUserData(res, access_token);
+        })
+        .catch((err) => res.status(500).json({ err: err.message }));
 });
 
 const getUserData = async (response, access_token) => {
-  const octokit = new Octokit({
-    auth: access_token,
-  });
-  const user = await octokit.request("GET /user", {});
-  const { email, login } = user.data;
-  response.redirect(`/authorized/?login=${login}&email=${email}`);
+    const octokit = new Octokit({
+        auth: access_token,
+    });
+    const user = await octokit.request("GET /user", {});
+    const { email, login, id } = user.data;
+    console.log(user.data);
+    response.redirect(`/authorized/?login=${login}&email=${email}&id=${id}`);
 };
 
 console.log(`App listening on port: ${port}`);

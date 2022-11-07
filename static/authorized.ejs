@@ -10,27 +10,43 @@
 </head>
 
 <body>
-    <div class="card authorized">
+    <div class="card">
         <div class="top">
-            <img class="github-logo" src="../githublogo.png" />
-            <h1></span><br />Congratulations!<br />You are now Authorized!</h1>
-            <div class="userData">
-                <span>
-                    Email: <span class="data">
-                        <%=email%>
-                    </span>
-                </span>
-                <span>
-                    User Name: <span class="data">
-                        <%=login%>
-                    </span>
-                </span>
-            </div>
+            <img id="logo" class="logo" />
+            <h1></span><br />Congratulations! <%=login%> <br />You are now Authorized!</h1>
+            <h3>Here is a list of your Repos, visit any project by clicking below</h3>
+            <ul id="repoList">
+            </ul>
             <div class="card-bottom">
                 <a class="btn" href="/unauthorized">Logout</a>
             </div>
         </div>
     </div>
+    <%- include('footer') -%>
 </body>
+<script>
+    const user = "<%= login  %>"
+    const id = "<%= id  %>"
+    console.log(id);
+    // const getRepos = async () => {
+    fetch(`https://api.github.com/users/${user}/repos`).then(async (res) => {
+        const data = await res.json()
+        const repoList = document.getElementById('repoList')
+        data.forEach(repo => {
+            const repoLi = document.createElement('li')
+            const repoAnchor = document.createElement('a')
+            repoAnchor.href = repo.html_url
+            repoAnchor.innerHTML = repo.name
+            repoAnchor.target = '_blank'
+            repoLi.appendChild(repoAnchor)
+            repoList.appendChild(repoLi)
+        });
+    })
+    const avatarURL = `https://avatars.githubusercontent.com/u/${id}?v=4`
+    console.log(avatarURL);
+    document.getElementById('logo').src = avatarURL
+    document.getElementById('logo').alt = user
+// }
+</script>
 
 </html>

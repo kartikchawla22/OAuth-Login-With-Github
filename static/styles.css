@@ -2,10 +2,11 @@ body {
     height: 100vh;
     margin: 0;
     display: flex;
+    width: 100%;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
     background: rgb(225, 87, 36);
-    background: linear-gradient(0deg, rgba(225, 87, 36) 0%, rgb(179, 67, 26) 100%);
 }
 
 .card {
@@ -15,13 +16,18 @@ body {
     align-items: center;
     text-align: center;
     background: white;
-    width: 380px;
-    height: 480px;
+    width: 50%;
+    height: 100%;
     border-radius: 50px;
     box-shadow: 0 3px 16px #222;
+    margin: 20px;
 }
 
-.github-logo {
+.card-bottom {
+    padding: 20px;
+}
+
+.logo {
     height: 160px;
 }
 
@@ -55,4 +61,30 @@ input[type='text'] {
 
 .data {
     font-weight: 800;
+}
+
+footer {
+    margin: 10px;
+    font-size: 20px;
+}
+
+#repoList {
+    max-height: 200px;
+    overflow-x: scroll;
+    list-style: none;
+}
+
+li {
+    cursor: pointer;
+    margin: 5px;
+
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    background: grey;
 }
